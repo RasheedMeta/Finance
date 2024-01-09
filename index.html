@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.1.0/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.rawgit.com/ngokevin/kframe/master/components/navigation/dist/aframe-navigation-mesh.min.js"></script>
+    <script src="aframe-extras.min.js"></script>
+    <script src="control.js"></script>
+    <script src="animation.js"></script>
+    <script src="close.js"></script>
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+
+
+    
+  </head>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+    }
+
+    #iframeContainer {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+        z-index: 5;
+    }
+
+    #iframeModal {
+        width: 80%;
+        height: 80%;
+    }
+
+    #closeButton {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        color: white;
+        font-size: 20px;
+    }
+</style>
+
+  <body>
+
+
+    <div id="iframeContainer">
+      <div id="closeButton" onclick="closeIframe()">X</div>
+      <iframe id="iframeModal"></iframe>
+  </div>
+      <a-scene cursor = "rayOrigin: mouse" >
+        
+        <a-sky src="sun3.jpg" material="" geometry="" position="10 0 10" rotation="0 180 0"></a-sky>
+
+        <a-entity id="rig" position="-2 -1 0" rotation="0 -90 0" nipple-controls="mode: static"
+          movement-controls="constrainToNavMesh: true ; controls: gamepad,keyboard,nipple; speed: 0.3;" navigation-mesh>
+          <a-entity id="camera" camera look-controls position="0 0 0" rotation="0 -3.43 0"
+            cursor="rayOrigin: mouse; fuseTimeout:0;" raycaster="interval: 30;objects: [nav-mesh];" navigation-mesh>
+          </a-entity>
+        </a-entity>
+
+      
+
+       <a-assets>
+        <a-box></a-box>
+        <a-asset-item id="cityModel" position="0 -13 0" src="finnace2.glb"></a-asset-item>
+        <a-asset-item id="cityModel2" position="0 -10 0" src="tobs.glb"></a-asset-item>
+        <a-asset-item id="cityModel1" position="0 -13 0" src="cube.glb" ></a-asset-item>
+        <a-asset-item id="navMeshModel" position="0 -13 0" src="floor.glb"></a-asset-item>
+
+     
+    </a-assets>
+        
+        <a-entity position="0 0 0" rotation=" 0 270 0"  gltf-model="#cityModel" modify-materials ></a-entity>
+        <a-entity position="0 0 0" rotation=" 0 270 0"  gltf-model="#cityModel1" modify-materials clicked1="" ></a-entity>
+        <a-entity  id="myAnim" position="3.5 -2.4 0" rotation=" 0 270 0"  gltf-model="#cityModel2" modify-materials  clicked2=""></a-entity>
+        
+       <a-entity gltf-model="#navMeshModel" position="0 0 0" rotation="0 270 0" nav-mesh visible="false" ></a-entity>
+   
+      </a-scene>
+  </body>
+</html>
+
