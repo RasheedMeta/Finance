@@ -3,12 +3,12 @@
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.1.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.rawgit.com/ngokevin/kframe/master/components/navigation/dist/aframe-navigation-mesh.min.js"></script>
-    <script src="aframe-extras.min.js"></script>
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+    <link rel="stylesheet" href="style.css">
     <script src="control.js"></script>
     <script src="animation.js"></script>
     <script src="close.js"></script>
-    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
-    <link rel="stylesheet" href="style.css">
+
 
 
     
@@ -17,18 +17,17 @@
   <body>
 
 
-    <div id="iframeContainer">
-      <div id="closeButton" onclick="closeIframe()">X</div>
-      <iframe id="iframeModal"></iframe>
-  </div>
+
       <a-scene cursor = "rayOrigin: mouse" >
+        
         
         <a-sky src="sun3.jpg" material="" geometry="" position="10 0 10" rotation="0 180 0"></a-sky>
 
         <a-entity id="rig" position="-2 -1 0" rotation="0 -90 0" nipple-controls="mode: static"
-          movement-controls="constrainToNavMesh: true ; controls: gamepad,keyboard,nipple; speed: 0.3;" navigation-mesh>
+          movement-controls="constrainToNavMesh: true ; controls:nipple,keyboard;  speed: 0.3;" keyboard-controls="debug: true" navigation-mesh>
           <a-entity id="camera" camera look-controls position="0 0 0" rotation="0 -3.43 0"
             cursor="rayOrigin: mouse; fuseTimeout:0;" raycaster="interval: 30;objects: [nav-mesh];" navigation-mesh>
+            <a-cursor geometry="primitive: ring; radiusOuter: 0.016; radiusInner: 0.010" material="color: #ffffff;  opacity: 1; "></a-cursor>
           </a-entity>
         </a-entity>
 
@@ -45,12 +44,31 @@
     </a-assets>
         
         <a-entity position="0 0 0" rotation=" 0 270 0"  gltf-model="#cityModel" modify-materials ></a-entity>
-        <a-entity position="0 0 0" rotation=" 0 270 0"  gltf-model="#cityModel1" modify-materials clicked1="" ></a-entity>
-        <a-entity  id="myAnim" position="3.5 -2.4 0" rotation=" 0 270 0"  gltf-model="#cityModel2" modify-materials  clicked2=""></a-entity>
+        <a-entity position="0 0 0" rotation=" 0 270 0"  gltf-model="#cityModel1" modify-materials geometry="" clicked1="" ></a-entity>
+        <a-entity  id="myAnim" position="3.5 -2.4 0" rotation=" 0 270 0"  gltf-model="#cityModel2" modify-materials geometry="" clicked2="" ></a-entity>
         
        <a-entity gltf-model="#navMeshModel" position="0 0 0" rotation="0 270 0" nav-mesh visible="false" ></a-entity>
    
       </a-scene>
+      <div id="iframeContainer">
+        <div id="closeButton" onclick="closeIframe()">X</div>
+        <iframe id="iframeModal"></iframe>
+    </div>
+    <div id="modalContainer">
+      <!-- Modal Content -->
+      <div id="modalContent">
+        <button id="closeButton1" onclick="closeIframe1()">Close</button>
+          <h2>Instructions</h2>
+          <p>-Use WASD keys to move forward, backward, left, and right.</p>
+          <p>-Use the joystick if you are on mobile</p>
+          <p>-Look around using your mouse or touchpad.</p>
+          <p>-Move the circle cursor to the object or character to select it!</p>
+          <p>Explore the virtual environment!</p>
+          
+      </div>
+  </div>
+      
   </body>
+  
 </html>
 

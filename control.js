@@ -14,24 +14,26 @@
 })
 */
 
-
 AFRAME.registerComponent('clicked1', {
-    init: function(){
-        let el = this.el;
-        this.toggleColor = function(){
-            const iframeContainer = document.getElementById('iframeContainer');
-            const iframeModal = document.getElementById('iframeModal');
+    init: function () {
+        let entity = this.el;
 
-            // Set the iframe source to the desired website
-            iframeModal.src = 'https://mtn-finance-help-desk.vercel.app/';
+        this.changeColor = function () {
+            const containerElement = document.getElementById('iframeContainer');
+            const modalElement = document.getElementById('iframeModal');
 
-            // Display the iframe container
-            iframeContainer.style.display = 'flex';
+            modalElement.src = 'https://mtn-finance-help-desk.vercel.app/';
+            containerElement.style.display = 'flex';
         }
-        this.el.addEventListener('click', this.toggleColor);
 
+        // Use the cursor component for interaction
+        entity.setAttribute('cursor-listener', {});
+
+        // Listen for the click event triggered by the cursor component
+        entity.addEventListener('click', this.changeColor);
     },
-    remove: function(){
-        this.el.removeEventListener('click', this.toggleColor);
+
+    remove: function () {
+        this.el.removeEventListener('click', this.changeColor);
     }
-})
+});
